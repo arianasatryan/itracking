@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="assets/styles/index.css">
+    <link rel="stylesheet" href="assets/styles/options.css">
+    <script src="assets/js/index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="uploaders">
+            <div class="image-card">
+                <h3>Upload an Image</h3>
+                <div class="drop_box">
+                    <header>
+                        <h4>Select Image here</h4>
+                    </header>
+                    <p>Supported Formats: png, jpeg</p>
+                    <form id="imageUploadForm" enctype="multipart/form-data">
+                        <input type="file" accept=".png, .jpeg" id="imageFileInput" style="display:none;">
+                        <button class="btn" onclick="document.getElementById('imageFileInput').click()">Choose Image</button>
+                    </form>
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        <label for="detectPoseCheckbox">Pose Detection</label>
+                        <div class="switch">
+                            <input type="checkbox" id="detectPoseCheckbox" class="switch-checkbox">
+                            <label for="detectPoseCheckbox" class="switch-label"></label>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <label for="detectFaceCheckbox">Face Detection</label>
+                        <div class="switch">
+                            <input type="checkbox" id="detectFaceCheckbox" class="switch-checkbox">
+                            <label for="detectFaceCheckbox" class="switch-label"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="video-card">
+                <h3>Upload a Video</h3>
+                <div class="drop_box">
+                    <header>
+                        <h4>Select Video here</h4>
+                    </header>
+                    <p>Supported Formats: mp3, mp4</p>
+                    <form id="videoUploadForm" enctype="multipart/form-data">
+                        <input type="file" accept=".mp3, .mp4" id="videoFileInput" style="display:none;">
+                        <button class="btn" onclick="document.getElementById('videoFileInput').click()">Choose Video</button>
+                    </form>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <label for="trackPoseCheckbox">Pose Tracking</label>
+                        <div class="switch">
+                            <input type="checkbox" id="trackPoseCheckbox" class="switch-checkbox">
+                            <label for="trackPoseCheckbox" class="switch-label"></label>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <label for="trackFaceCheckbox">Face Tracking</label>
+                        <div class="switch">
+                            <input type="checkbox" id="trackFaceCheckbox" class="switch-checkbox">
+                            <label for="trackFaceCheckbox" class="switch-label"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container video-container" id="videoPlayerContainer">
+        <video id="videoPlayer" controls></video>
+    </div>
+</body>
+</html>
