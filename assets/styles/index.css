@@ -16,24 +16,51 @@
   align-items: center;
   justify-content: center;
   background-color: #fcfcfc;
+  margin-top: 30px;
 }
 
 .uploaders{
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+.configurations{
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  margin-left: 30px;
+}
+
+.configurations h{
+  font-size: large;
+  font-weight: 500;
+}
+
+.option{
+  display: flex;
+  margin-right: 30px;
+  margin-top: 10px;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+
+#KeypointsCheckbox, #BoxesCheckbox {
+  width: 20px;
+  height: 20px; 
+  accent-color: #007bff;
 }
 
 .video-card, .image-card {
   max-width: calc(100% - 20px);
   border-radius: 10px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
-  width: 600px;
+  width: 400px;
   height: 260px;
   background-color: #ffffff;
-  padding: 10px 30px 40px;
-  margin-top: 50px;
+  padding: 10px 30px 40px 30px;
   margin-bottom: 50px;
-  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .video-card h3, .image-card h3 {
@@ -45,11 +72,12 @@
 .drop_box {
   margin: 10px 0;
   padding: 30px;
+  padding-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border: 3px dotted #a3a3a3;
+  border: 2.5px dotted #a3a3a3;
   border-radius: 5px;
 }
 
