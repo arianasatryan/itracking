@@ -36,96 +36,7 @@
   font-size: large;
   font-weight: 500;
 }
-
-.option{
-  display: flex;
-  margin-right: 30px;
-  margin-top: 10px;
-  grid-template-columns: 1em auto;
-  gap: 0.5em;
-}
-
-#KeypointsCheckbox, #BoxesCheckbox {
-  width: 20px;
-  height: 20px; 
-  accent-color: #007bff;
-}
-
-.video-card, .image-card {
-  max-width: calc(100% - 20px);
-  border-radius: 10px;
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
-  width: 400px;
-  height: 260px;
-  background-color: #ffffff;
-  padding: 10px 30px 40px 30px;
-  margin-bottom: 50px;
-  margin-right: 30px;
-}
-
-.video-card h3, .image-card h3 {
-  font-size: 22px;
-  font-weight: 600;
-  
-}
-
-.drop_box {
-  margin: 10px 0;
-  padding: 30px;
-  padding-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border: 2.5px dotted #a3a3a3;
-  border-radius: 5px;
-}
-
-.drop_box h4 {
-  font-size: 16px;
-  font-weight: 400;
-  color: #2e2e2e;
-}
-
-.drop_box p {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  font-size: 12px;
-  color: #a3a3a3;
-}
-
-.btn {
-  text-decoration: none;
-  background-color: #007bff;
-  background-image: linear-gradient(to bottom, #007bff, #0056b3);
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  outline: none;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.btn:hover{
-  text-decoration: none;
-  background-color: linear-gradient(to bottom, #0056b3, #003d6e);
-  padding: 10px 20px;
-  border: none;
-  outline: 2px solid #818080;
-  cursor: pointer;
-  transition: background-image 0.3s ease;
-}
-
-.form input {
-  margin: 10px 0;
-  width: 100%;
-  background-color: #e2e2e2;
-  border: none;
-  outline: none;
-  padding: 12px 20px;
-  border-radius: 4px;
-}
-
+/* 
 .video-container {
   display: none;
   display: flex;
@@ -139,4 +50,4 @@
   width: 100%;
   max-width: 100%; 
   height: auto; 
-}
+} */

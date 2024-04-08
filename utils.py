@@ -2,8 +2,8 @@ from ultralytics import YOLO
 import cv2
 
 models = {
-    "face": YOLO('models/yolov8n-face.pt'),
-    "pose": YOLO(f"yolov8x-pose.pt")
+    "FaceRadio": YOLO('models/yolov8n-face.pt'),
+    "PoseRadio": YOLO(f"yolov8x-pose.pt")
 }
 
 def detect(image_path, category, output_path, show_keypoints=True, show_boxes=True):
@@ -34,3 +34,11 @@ def track(video_path, category, output_video_path, show_keypoints=True, show_box
         else:
             break
     return output_video_path
+
+"""
+activeModel= 'FaceRadio'
+output_tmp_file_path = 'ztmp/test.mp4'
+show_keypoints = True
+show_boxes = True
+track('/home/lab6/Downloads/5752729-hd_1920_1080_30fps.mp4', category=activeModel, output_video_path=output_tmp_file_path, show_keypoints=show_keypoints, show_boxes=show_boxes)
+"""

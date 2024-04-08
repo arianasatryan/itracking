@@ -3,15 +3,11 @@
 
 <head>
     <link rel="stylesheet" href="assets/styles/index.css">
+    <link rel="stylesheet" href="assets/styles/cards.css">
     <link rel="stylesheet" href="assets/styles/options.css">
-    <script src="assets/js/index.js"></script>
-    <script>
-        window.onload = function() {
-            document.getElementById('FaceCheckbox').checked = true;
-            document.getElementById('BoxesCheckbox').checked = true;
-            document.getElementById('KeypointsCheckbox').checked = true;
-        };
-    </script>
+    <link rel="stylesheet" href="assets/styles/player.css">
+    <link rel="stylesheet" href="assets/styles/loading.css">
+    <script src="assets/js/index.js" defer></script>
 </head>
 
 <body>
@@ -25,8 +21,8 @@
                     </header>
                     <p>Formats: bmp, dng, jpeg, jpg, mpo, png, tif, tiff, webp, pfm</p>
                     <form id="imageUploadForm" enctype="multipart/form-data">
+                        <label for="imageFileInput" class="custom-file-upload" id="chooseImageButton">Choose Image</label>
                         <input type="file" accept=".bmp, .dng, .jpeg, .jpg, .mpo, .png, .tif, .tiff, .webp, .pfm" id="imageFileInput" style="display:none;">
-                        <button class="btn" onclick="document.getElementById('imageFileInput').click()">Choose Image</button>
                     </form>
                 </div>
             </div>
@@ -36,10 +32,10 @@
                     <header>
                         <h4>Select Video here</h4>
                     </header>
-                    <p>Formats: asf, avi, gif, m4v, mkv, mov, mp4, mpeg, mpg, ts, wmv, webm</p>
+                    <p>Formats: asf, avi, m4v, mkv, mov, mp4, mpeg, mpg, ts, wmv, webm</p>
                     <form id="videoUploadForm" enctype="multipart/form-data">
-                        <input type="file" accept=".asf, .avi, .gif, .m4v, .mkv, .mov, .mp4, .mpeg, .mpg, .ts, .wmv, .webm" id="videoFileInput" style="display:none;">
-                        <button class="btn" onclick="document.getElementById('videoFileInput').click()">Choose Video</button>
+                        <label for="videoFileInput" class="custom-file-upload" id="chooseVideoButton">Choose Video</label>
+                        <input type="file" accept=".asf, .avi, .m4v, .mkv, .mov, .mp4, .mpeg, .mpg, .ts, .wmv, .webm" id="videoFileInput" style="display:none;">
                     </form>
                 </div>
             </div>
@@ -47,45 +43,37 @@
                 <div class="model-options">
                     <h>Model</h>
                     <div class="option">
-                        <label for="FaceCheckbox">Face Model</label>
-                        <div class="switch">
-                            <input type="checkbox" id="FaceCheckbox" class="switch-checkbox">
-                            <label for="FaceCheckbox" class="switch-label"></label>
-                        </div>
+                        <span>Face Model</span>
+                        <input type="radio" id="FaceRadio" name="model" class="switch-radio" checked>
+                        <label for="FaceRadio" class="switch-label"></label>
                     </div>
                     <div class="option">
-                        <label for="PoseCheckbox">Pose Model</label>
-                        <div class="switch">
-                            <input type="checkbox" id="PoseCheckbox" class="switch-checkbox">
-                            <label for="PoseCheckbox" class="switch-label"></label>
-                        </div>
+                        <span>Pose Model</span>
+                        <input type="radio" id="PoseRadio" name="model" class="switch-radio">
+                        <label for="PoseRadio" class="switch-label"></label>
                     </div>
                 </div>
                 <div class="display-options">
                     <h>Options</h>
                     <div class="option">
-                        <div class="visualoption">
-                            <input type="checkbox" id="BoxesCheckbox">
-                        </div>
-                        <div>
-                            <label for="BoxesCheckbox" class="form-control">Boxes</label>
-                        </div>
+                        <input type="checkbox" id="BoxesCheckbox" class="option-checkbox">
+                        <label for="BoxesCheckbox" class="form-control">Boxes</label>
                     </div>
                     <div class="option">
-                        <div class="visualoption">
-                            <input type="checkbox" id="KeypointsCheckbox">
-                        </div>
-                        <div>
-                            <label for="KeypointsCheckbox" class="form-control">Keypoints</label>
-                        </div>
+                        <input type="checkbox" id="KeypointsCheckbox" class="option-checkbox">
+                        <label for="KeypointsCheckbox" class="form-control">Keypoints</label>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container video-container" id="videoPlayerContainer">
-        <video id="videoPlayer" controls></video>
+        <div class="player-container" id="playerContainer">
+            <div class="image-column" id="uploadedImageColumn">
+                <img src="/assets/files/face-example1-friends.jpg"/>
+            </div>
+            <div class="image-column" id="processedImageColumn">
+                <img src="/assets/files/face-example1-friends.jpg"/>
+            </div>
+        </div>
     </div>
 </body>
 </html>
