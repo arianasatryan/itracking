@@ -10,7 +10,7 @@ def detect(image_path, category, output_path, show_keypoints=True, show_boxes=Tr
     assert category in models
     model = models[category]
     results = model.predict(source=image_path, conf=0.3, classes=0, stream=False, verbose=False)
-    pil_image = results[0].plot(boxes=show_boxes, kpt_radius=int(show_keypoints)*3, pil=True, save=True, filename=output_path)
+    pil_image = results[0].plot(boxes=show_boxes, kpt_radius=int(show_keypoints)*3, pil=True, save=True, filename=output_path, labels=False)
     return pil_image, results
 
 
