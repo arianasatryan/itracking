@@ -1,0 +1,22 @@
+.custom-file-download {
+    text-decoration: none;
+    background-color: #007bff;
+    background-image: linear-gradient(to bottom, #007bff, #0056b3);
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.3s;
+    cursor: pointer;
+
+  }
+  
+.custom-file-download:hover{
+    text-decoration: none;
+    background-color: linear-gradient(to bottom, #0056b3, #003d6e);
+    padding: 10px 20px;
+    border: none;
+    outline: 2px solid #818080;
+    cursor: pointer;
+    transition: background-image 0.3s ease;
+}

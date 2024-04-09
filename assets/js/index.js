@@ -77,18 +77,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const reader = new FileReader();
     
         reader.onload = async function(e) {
-            const imageColumns = document.querySelectorAll('.image-column');
-            imageColumns.forEach(function(imageColumn) {
-                imageColumn.innerHTML = ''; 
-            });
-    
             const uploadedImage = document.createElement('img');
-            uploadedImage.src = e.target.result; 
+            uploadedImage.src = e.target.result;
     
-            const originalImageColumn = document.getElementById('uploadedImageColumn');
-            originalImageColumn.appendChild(uploadedImage);
-
+            // Create the image column elements dynamically
+            const uploadedImageColumn = document.createElement('div');
+            uploadedImageColumn.classList.add('image-column');
+            uploadedImageColumn.id = 'uploadedImageColumn';
+            uploadedImageColumn.appendChild(uploadedImage);
+    
+            const processedImageColumn = document.createElement('div');
+            processedImageColumn.classList.add('image-column');
+            processedImageColumn.id = 'processedImageColumn';
+    
+            // Clear any existing content in the player container
+            const playerContainer = document.getElementById('playerContainer');
+            playerContainer.innerHTML = '';
+            playerContainer.appendChild(uploadedImageColumn);
+            playerContainer.appendChild(processedImageColumn);
+    
             showLoadingSpinner('processedImageColumn');
+
+            console.log("playerContainer", playerContainer)
     
             try {
                 const activeModel = getActiveModel();
@@ -143,21 +153,23 @@ document.addEventListener('DOMContentLoaded', function() {
         const videoCard = document.querySelector('.video-card .drop_box');
         videoCard.style.backgroundColor = '#f2f7ff';
     
-        // Clear the player container
-        const playerContainer = document.querySelector('.player-container');
-        playerContainer.innerHTML = '';
+        // Check if the download container already exists
+        let playerContainer = document.querySelector('.player-container');
+        if (!playerContainer) {
+            // If the download container does not exist, create a new one
+            playerContainer = document.createElement('div');
+            playerContainer.id = 'playerContainer';
+            playerContainer.classList.add('player-container');
+            document.body.appendChild(playerContainer);
+        } else {
+            // If the download container already exists, clear its contents
+            playerContainer.innerHTML = '';
+        }
+        console.log("Video playercontaner", playerContainer)
     
         // Show the loading spinner
         showLoadingSpinner('playerContainer')
-    
-        // Create a video element
-        const videoElement = document.createElement('video');
-        videoElement.controls = true;
-        videoElement.preload = 'auto'; 
-        videoElement.style.maxWidth = '100%';
-        videoElement.style.maxHeight = '100%';
-    
-    
+
         try {
             const activeModel = getActiveModel();
             const activeOptions = getActiveOptions();
@@ -180,15 +192,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 const videoBlob = await response.blob();
                 console.log('Video Blob:', videoBlob); // Log the blob
                 const videoUrl = URL.createObjectURL(videoBlob);
-                videoElement.src = videoUrl;
     
-                // Append the video element to the player container
-                playerContainer.appendChild(videoElement);
-    
-                videoElement.addEventListener('loadedmetadata', function() {
-                    // Once the metadata is loaded, play the video
-                    videoElement.play();
-                });
+                // Create a download button for the processed video
+                const downloadButton = document.createElement('a');
+                downloadButton.textContent = 'Download Result';
+                downloadButton.href = videoUrl;
+                downloadButton.classList.add('custom-file-upload');
+
+                const fileName = file.name;
+                downloadButton.download = fileName;
+                
+                // Append the download button to the player container
+                playerContainer.appendChild(downloadButton);
             } else {
                 const errorMessage = await response.text();
                 console.error('Failed to upload video:', errorMessage);

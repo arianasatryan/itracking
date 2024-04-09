@@ -43,21 +43,24 @@ async def upload_image(file: UploadFile = File(...), activeModel: str = Form(...
 @app.post("/upload/video")
 async def upload_video(file: UploadFile = File(...), activeModel: str = Form(...), activeOptions: List[str] = Form()):
     try:
-        # file_extension = os.path.splitext(file.filename)[1]
-        # with tempfile.NamedTemporaryFile(suffix=file_extension, dir='ztmp', delete=False) as tmp_file:
-        #     tmp_file.write(await file.read())
-        #     tmp_file_path = tmp_file.name
+        output_tmp_file_path = 'assets/files/file_example_AVI_480_750kB.avi'
+        return FileResponse(path=output_tmp_file_path, media_type="video/mp4")
 
-        # with tempfile.NamedTemporaryFile(suffix=file_extension, dir='ztmp', delete=False) as output_tmp_file:
-        #     output_tmp_file_path = output_tmp_file.name
+        file_extension = os.path.splitext(file.filename)[1]
+        with tempfile.NamedTemporaryFile(suffix=file_extension, dir='ztmp', delete=False) as tmp_file:
+            tmp_file.write(await file.read())
+            tmp_file_path = tmp_file.name
 
-        # show_keypoints = 'KeypointsCheckbox' in activeOptions
-        # show_boxes = 'BoxesCheckbox' in activeOptions
-        # print(tmp_file_path, output_tmp_file_path, flush=True)
+        with tempfile.NamedTemporaryFile(suffix=file_extension, dir='ztmp', delete=False) as output_tmp_file:
+            output_tmp_file_path = output_tmp_file.name
 
-        # track(tmp_file_path, category=activeModel, output_video_path=output_tmp_file_path, show_keypoints=show_keypoints, show_boxes=show_boxes)
+        show_keypoints = 'KeypointsCheckbox' in activeOptions
+        show_boxes = 'BoxesCheckbox' in activeOptions
+        print(tmp_file_path, output_tmp_file_path, flush=True)
+
+        track(tmp_file_path, category=activeModel, output_video_path=output_tmp_file_path, show_keypoints=show_keypoints, show_boxes=show_boxes)
         
-        response = FileResponse(path='ztmp/tmpn8n43agb.mp4', media_type="video/mp4")
+        response = FileResponse(path=output_tmp_file_path, media_type="video/mp4")
         # os.remove(tmp_file_path)
         return response
     except Exception as e:
