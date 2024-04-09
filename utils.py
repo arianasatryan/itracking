@@ -2,8 +2,8 @@ from ultralytics import YOLO
 import cv2
 
 models = {
-    "FaceRadio": YOLO('models/yolov8n-face.pt'),
-    "PoseRadio": YOLO(f"yolov8x-pose.pt")
+    "Face": YOLO('models/yolov8n-face.pt'),
+    "Pose": YOLO(f"yolov8x-pose.pt")
 }
 
 def detect(image_path, category, output_path, show_keypoints=True, show_boxes=True):

@@ -9,13 +9,25 @@ from fastapi.staticfiles import StaticFiles
 
 from utils import detect, track
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
-app.mount("/assets", StaticFiles(directory="assets"), name="assets")
-templates = Jinja2Templates(directory=".")
+
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+# app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+# templates = Jinja2Templates(directory=".")
 
 
 @app.post("/upload/image")
 async def upload_image(file: UploadFile = File(...), activeModel: str = Form(...), activeOptions: List[str] = Form()):
+    print(activeModel, activeOptions, flush=True)
     try:
         file_extension = os.path.splitext(file.filename)[1]        
         with tempfile.NamedTemporaryFile(suffix=file_extension, delete=False) as tmp_file:
@@ -25,8 +37,8 @@ async def upload_image(file: UploadFile = File(...), activeModel: str = Form(...
         with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as output_tmp_file:
             output_tmp_file_path = output_tmp_file.name
 
-        show_keypoints = 'KeypointsCheckbox' in activeOptions
-        show_boxes = 'BoxesCheckbox' in activeOptions
+        show_keypoints = 'Keypoints' in activeOptions
+        show_boxes = 'Boxes' in activeOptions
 
         detect(tmp_file_path, category=activeModel, output_path=output_tmp_file_path, show_keypoints=show_keypoints, show_boxes=show_boxes)
         response = FileResponse(path=output_tmp_file_path, media_type="image/jpeg")
@@ -34,6 +46,7 @@ async def upload_image(file: UploadFile = File(...), activeModel: str = Form(...
         return response
     except Exception as e:
         print("Error:", e, flush=True)
+        raise e 
         return {"error": "An error occurred while processing the file"}
     finally:
         if os.path.exists(tmp_file_path):
@@ -68,8 +81,8 @@ async def upload_video(file: UploadFile = File(...), activeModel: str = Form(...
         return {"error": "An error occurred while processing the file"}
 
 
-@app.get("/", response_class=HTMLResponse)
-async def root(request: Request):
-    return templates.TemplateResponse(
-        "index.html", {"request": request}
-    )
+# @app.get("/", response_class=HTMLResponse)
+# async def root(request: Request):
+#     return templates.TemplateResponse(
+#         "index.html", {"request": request}
+#     )
